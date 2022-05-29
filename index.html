@@ -41,6 +41,7 @@
                     class="chip"
                     style="background-color: rgba(201, 139, 9, 1);"
                     data-rgba="rgba(201, 139, 9, 1)"
+                    onclick="clickChipElem(this)"
                 >
                     ocre
                 </div>
@@ -48,6 +49,7 @@
                     class="chip"
                     style="background-color: rgba(190, 105, 26, 1);"
                     data-rgba="rgba(190, 105, 26, 1)"
+                    onclick="clickChipElem(this)"
                 >
                     orange
                 </div>
@@ -55,6 +57,7 @@
                     class="chip"
                     style="background-color: rgba(72, 89, 153, 1);"
                     data-rgba="rgba(72, 89, 153, 1)"
+                    onclick="clickChipElem(this)"
                 >
                     blue
                 </div>
@@ -62,6 +65,7 @@
                     class="chip chip--petrol"
                     style="background-color: rgba(36, 111, 161, 1);"
                     data-rgba="rgba(36, 111, 161, 1)"
+                    onclick="clickChipElem(this)"
                 >
                     petrol
                 </div>
@@ -69,6 +73,7 @@
                     class="chip"
                     style="background-color: rgba(59, 147, 189, 1);"
                     data-rgba="rgba(59, 147, 189, 1)"
+                    onclick="clickChipElem(this)"
                 >
                     cyan
                 </div>
@@ -76,6 +81,7 @@
                     class="chip chip--half-green"
                     style="background-color: rgba(0, 150, 94, 0.5);"
                     data-rgba="rgba(0, 150, 94, 0.5)"
+                    onclick="clickChipElem(this)"
                 >
                     half green
                 </div>
@@ -96,6 +102,21 @@
             const onEveryFrame = () => {
                 // this can bu run on "every frame"
             };
+
+            /**
+             * set preview element background color based on chip color selection
+             * @param chip list elem
+             */
+            function clickChipElem(elem) {
+               const rgba = elem.getAttribute('data-rgba');
+               previewElement.style.backgroundColor = rgba;
+               component.setAttribute('data-color',rgba);
+               const output = rgbaToHex(rgba);
+               alphaValueDisplay.innerText = output[1];
+               colorValueDisplay.innerText = output[0];
+               alphaInput.value = output[1];
+               colorInput.value = output[0];
+            }
 
             /**
              * Converts rgba string "rgba(255,255,255,1)" into separate hex and aplha (percentual) values
@@ -212,6 +233,6 @@
         <div id="qunit-fixture"></div>
         <script src="node_modules/qunit/qunit/qunit.js"></script>
         <script src="spec/colors.spec.js"></script>
-        <!-- <script src="spec/component.spec.js"></script> -->
+        <script src="spec/component.spec.js"></script>
     </body>
 </html>
