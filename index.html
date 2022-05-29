@@ -103,7 +103,17 @@
              * @param string
              * @return tuple [string, float], defaults to white with 100% opacity.
              */
-            function rgbaToHex(rgba) {}
+            function rgbaToHex(rgba) {
+                let output = [];
+                let inParts = rgba.substring(rgba.indexOf("(") + 1, rgba.indexOf(")")) .split(",");
+                let r = inParts[0] ? parseInt(inParts[0]) : 255,
+                    g = inParts[1] ? parseInt(inParts[1]) : 255,
+                    b = inParts[2] ? parseInt(inParts[2]) : 255,
+                    a = inParts[3] || 1;
+                output[0] =  `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`;
+                output.push(parseFloat((a * 100).toFixed(3))); // for the conversion upto 3 decimal places
+                return output; 
+            }
 
             /**
              * Combines a hex value (#aa5588) and an alpha value into an rgba string "rgba(255,255,255,1)"
