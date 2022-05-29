@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Background color conversion</title>
+        <link rel="stylesheet" href="node_modules/qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <form class="container">
+            <h1 class="title">background-color:</h1>
+            <!-- this componen watches the value in this data-color attribute -->
+            <div class="component" data-color="rgba(255,107,0,1)">
+                <div class="preview-wrapper">
+                    <div class="preview">
+                        <span class="preview-sample-text">Text</span>
+                    </div>
+                </div>
+                <div class="controlls">
+                    <label
+                        >color<input
+                            type="color"
+                            class="color-input"
+                            value="#000000" /><span
+                            class="color-value-display"
+                        ></span></label
+                    ><label
+                        >alpha<input
+                            type="range"
+                            min="0"
+                            max="100"
+                            value="50"
+                            step="0.1"
+                            class="alpha-input" />
+                        <span class="alpha-value-display"></span
+                    ></label>
+                </div>
+            </div>
+            <div class="chips-list">
+                <div
+                    class="chip"
+                    style="background-color: rgba(201, 139, 9, 1);"
+                    data-rgba="rgba(201, 139, 9, 1)"
+                >
+                    ocre
+                </div>
+                <div
+                    class="chip"
+                    style="background-color: rgba(190, 105, 26, 1);"
+                    data-rgba="rgba(190, 105, 26, 1)"
+                >
+                    orange
+                </div>
+                <div
+                    class="chip"
+                    style="background-color: rgba(72, 89, 153, 1);"
+                    data-rgba="rgba(72, 89, 153, 1)"
+                >
+                    blue
+                </div>
+                <div
+                    class="chip chip--petrol"
+                    style="background-color: rgba(36, 111, 161, 1);"
+                    data-rgba="rgba(36, 111, 161, 1)"
+                >
+                    petrol
+                </div>
+                <div
+                    class="chip"
+                    style="background-color: rgba(59, 147, 189, 1);"
+                    data-rgba="rgba(59, 147, 189, 1)"
+                >
+                    cyan
+                </div>
+                <div
+                    class="chip chip--half-green"
+                    style="background-color: rgba(0, 150, 94, 0.5);"
+                    data-rgba="rgba(0, 150, 94, 0.5)"
+                >
+                    half green
+                </div>
+            </div>
+        </form>
+        <script>
+            // convenience alias for selectin elements.
+            const $ = document.querySelector.bind(document);
+
+            // these you can skip, or change as long as the test pass.
+            const component = $('.component');
+            const alphaInput = $('.alpha-input');
+            const alphaValueDisplay = $('.alpha-value-display');
+            const colorInput = $('.color-input');
+            const colorValueDisplay = $('.color-value-display');
+            const previewElement = $('.preview');
+
+            const onEveryFrame = () => {
+                // this can bu run on "every frame"
+            };
+
+            /**
+             * Converts rgba string "rgba(255,255,255,1)" into separate hex and aplha (percentual) values
+             * NOTE: alpha must be represented in percentage.
+             * @param string
+             * @return tuple [string, float], defaults to white with 100% opacity.
+             */
+            function rgbaToHex(rgba) {}
+
+            /**
+             * Combines a hex value (#aa5588) and an alpha value into an rgba string "rgba(255,255,255,1)"
+             * @param tuple [string, float]
+             * @return string an rgba() color, it defaults to white
+             */
+            function hexToRgba(hex, alpha = 100) {}
+
+            // this is not really required for the tests, it's just useful if you want
+            (function init() {})();
+        </script>
+
+        <!-- styles are intentionally at the end to be out of the way -->
+        <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            .title,
+            .color-value-display,
+            .alpha-value-display {
+                font-family: monospace;
+            }
+            .title {
+                display: inline-block;
+                margin-bottom: 0;
+
+                font-size: 22px;
+                line-height: 1.25;
+                padding: 0 1em;
+                background-color: rgb(184, 184, 184);
+            }
+            .component {
+                margin: 16px auto;
+                border: 1px solid #222;
+                padding: 16px 32px;
+                display: flex;
+            }
+            label {
+                display: block;
+            }
+            .color-input,
+            .alpha-input {
+                margin: 4px 16px;
+            }
+            .preview-wrapper {
+                width: 64px;
+                line-height: 64px;
+                margin: 0 24px;
+                text-align: center;
+                border: 1px solid #000;
+                box-shadow: 1px 1px 12px 0 rgba(0, 0, 0, 0.3);
+                position: relative;
+                background-image: linear-gradient(
+                        45deg,
+                        #ccc 25%,
+                        transparent 25%
+                    ),
+                    linear-gradient(45deg, transparent 75%, #ccc 72%),
+                    linear-gradient(45deg, transparent 75%, #ccc 75%),
+                    linear-gradient(45deg, #ccc 25%, transparent 25%);
+                background-size: 16px 16px;
+                background-position: 0 0, 0 0, -8px -8px, 8px 8px;
+            }
+            .preview-sample-text {
+                font-family: Georgia, 'Times New Roman', Times, serif;
+                font-weight: bold;
+                text-shadow: white 1px 1px 2px;
+                position: relative;
+                z-index: 1;
+            }
+            .alpha-value-display::after {
+                content: '%';
+            }
+            .chips-list {
+                display: flex;
+                margin: 16px auto;
+                border: 1px solid rgb(104, 104, 104);
+            }
+            .chip {
+                margin: 8px 16px;
+                padding: 16px 24px;
+                color: white;
+                cursor: pointer;
+            }
+        </style>
+        <div id="qunit"></div>
+        <div id="qunit-fixture"></div>
+        <script src="node_modules/qunit/qunit/qunit.js"></script>
+        <script src="spec/colors.spec.js"></script>
+        <!-- <script src="spec/component.spec.js"></script> -->
+    </body>
+</html>
